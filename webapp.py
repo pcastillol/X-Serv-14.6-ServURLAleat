@@ -53,8 +53,9 @@ class webApp:
             (recvSocket, address) = mySocket.accept()
             print('HTTP request received (going to parse and process):')
             request = recvSocket.recv(2048)
-            print(request.decode('utf-8'))
-            parsedRequest = self.parse(request)
+            request_str = request.decode('utf-8') #paso la peticion de bytes a string
+            print(request_str)
+            parsedRequest = self.parse(request_str)
             (returnCode, htmlAnswer) = self.process(parsedRequest)
             print('Answering back...')
             recvSocket.send(bytes("HTTP/1.1 " + returnCode + " \r\n\r\n"
